@@ -4,7 +4,7 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { envs } from './config/envs';
 
-const logger = new Logger();
+const logger = new Logger('Main-Products');
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
     transport: Transport.TCP,
