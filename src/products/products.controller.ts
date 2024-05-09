@@ -1,7 +1,7 @@
 import { Controller, ParseIntPipe } from '@nestjs/common';
 import { ProductsService } from './products.service';
-import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
+import { CreateProductDto } from './models/dto/create-product.dto';
+import { UpdateProductDto } from './models/dto/update-product.dto';
 import { PaginationDTO } from 'src/common/pagination.dto';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 
