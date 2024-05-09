@@ -10,6 +10,8 @@ interface EnvVars {
   DB_LOGGING: string;
   DB_LOGGING_ENABLE: boolean;
   DB_NAME: string;
+
+  NATS_SERVERS: string;
 }
 
 const envsSchema = joi
@@ -22,10 +24,14 @@ const envsSchema = joi
     DB_PASSWORD: joi.string().required(),
     DB_LOGGING: joi.string().required(),
     DB_LOGGING_ENABLED: joi.boolean().required(),
+    NATS_SERVERS: joi.array().items(joi.string().required()),
   })
   .unknown(true);
 
-const { error, value } = envsSchema.validate(process.env);
+const { error, value } = envsSchema.validate({
+  ...process.env,
+  NATS_SERVERS: process.env.NATS_SERVERS.split(','),
+});
 
 if (error) {
   throw new Error(`Config Validation Error: ${error}`);
@@ -42,4 +48,5 @@ export const envs = {
   dbLogging: envVars.DB_LOGGING,
   dbLoggingEnable: envVars.DB_LOGGING_ENABLE,
   dbName: envVars.DB_NAME,
+  natsServers: envVars.NATS_SERVERS,
 };

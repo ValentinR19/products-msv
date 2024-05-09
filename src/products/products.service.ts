@@ -6,6 +6,7 @@ import { RpcException } from '@nestjs/microservices';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from './models/classes/product.entity';
 import { In, Repository } from 'typeorm';
+import { log } from 'console';
 
 @Injectable()
 export class ProductsService {
@@ -37,7 +38,9 @@ export class ProductsService {
 
   async findOne(id: number) {
     const product = await this.productRepository.findOne({ where: { id } });
+
     if (!product) throw new RpcException(new NotFoundException(`Product with id ${id} not found.`));
+    return product;
   }
 
   async update(id: number, updateProductDto: UpdateProductDto) {
@@ -56,9 +59,11 @@ export class ProductsService {
     return this.productRepository.softDelete(id);
   }
 
-  async validateProducts(ids: number[]) {
+  async validateProducts({ ids }: any) {
+    ids = ids;
     ids = Array.from(new Set(ids));
-
+    console.log(ids);
+    
     const products = await this.productRepository.find({
       where: {
         id: In(ids),
@@ -68,7 +73,6 @@ export class ProductsService {
     if (products.length !== ids.length) {
       throw new RpcException({ message: 'Some products where not found', status: HttpStatus.BAD_REQUEST });
     }
-
     return products;
   }
 }

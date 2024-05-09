@@ -9,7 +9,7 @@ export class Product {
   @Column('varchar', { name: 'name' })
   name: string;
 
-  @Column('decimal', { name: 'price' })
+  @Column('decimal', { name: 'price', default: 0 })
   price: number;
 
   @Column('tinyint', { name: 'available', default: true })

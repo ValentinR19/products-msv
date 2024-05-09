@@ -45,7 +45,7 @@ export class ProductsController {
   }
 
   @MessagePattern({ cmd: 'findProductsByIds' })
-  async findProductsByIds(@Payload() ids: number[]) {
+  async findProductsByIds(@Payload() ids: any) {    
     return this.productsService.validateProducts(ids);
   }
 }
