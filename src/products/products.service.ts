@@ -62,7 +62,6 @@ export class ProductsService {
   async validateProducts({ ids }: any) {
     ids = ids;
     ids = Array.from(new Set(ids));
-    console.log(ids);
     
     const products = await this.productRepository.find({
       where: {
