@@ -8,11 +8,6 @@ import { envs } from './config/envs';
     TypeOrmModule.forRoot({
       type: 'postgres',
       url: envs.dbUrl,
-      // host: envs.dbHost,
-      // port: envs.dbPort,
-      // username: envs.dbUsername,
-      // password: envs.dbPassword,
-      // database: envs.dbName,
       logging: true,
       entities: ['dist/**/models/*/*{.entity.ts,.entity.js}'],
       synchronize: true,
