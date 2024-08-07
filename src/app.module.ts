@@ -6,18 +6,20 @@ import { envs } from './config/envs';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: envs.dbHost,
-      port: envs.dbPort,
-      username: envs.dbUsername,
-      password: envs.dbPassword,
-      database: envs.dbName,
+      type: 'postgres',
+      url: envs.dbUrl,
+      // host: envs.dbHost,
+      // port: envs.dbPort,
+      // username: envs.dbUsername,
+      // password: envs.dbPassword,
+      // database: envs.dbName,
       logging: true,
       entities: ['dist/**/models/*/*{.entity.ts,.entity.js}'],
-      synchronize: false,
+      synchronize: true,
       extra: {
         timezone: 'local',
       },
+      
     }),
     ProductsModule,
   ],

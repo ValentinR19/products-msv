@@ -10,6 +10,7 @@ interface EnvVars {
   DB_LOGGING: string;
   DB_LOGGING_ENABLE: boolean;
   DB_NAME: string;
+  DB_URL: string;
 
   NATS_SERVERS: string;
 }
@@ -25,6 +26,7 @@ const envsSchema = joi
     DB_LOGGING: joi.string().required(),
     DB_LOGGING_ENABLED: joi.boolean().required(),
     NATS_SERVERS: joi.array().items(joi.string().required()),
+    DB_URL: joi.string().required(),
   })
   .unknown(true);
 
@@ -48,5 +50,6 @@ export const envs = {
   dbLogging: envVars.DB_LOGGING,
   dbLoggingEnable: envVars.DB_LOGGING_ENABLE,
   dbName: envVars.DB_NAME,
+  dbUrl: envVars.DB_URL,
   natsServers: envVars.NATS_SERVERS,
 };
