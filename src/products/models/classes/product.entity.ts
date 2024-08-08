@@ -12,7 +12,7 @@ export class Product {
   @Column('decimal', { name: 'price', default: 0 })
   price: number;
 
-  @Column('tinyint', { name: 'available', default: true })
+  @Column('boolean', { name: 'available', default: true })
   available: boolean;
 
   @CreateDateColumn({
